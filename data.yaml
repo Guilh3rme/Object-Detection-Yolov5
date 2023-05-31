@@ -1,0 +1,15 @@
+train: Images/train
+val: Images/test
+
+nc: 9
+names:  [
+  'Protetor Facial',
+  'Capacete',
+  'Colete',
+  'Luvas',
+  'Mascara',
+  'Mascara com filtro',
+  'Protetor Auricular',
+  'Botas',
+  'Oculos de Protecao'
+  ]
