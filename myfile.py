@@ -13,7 +13,7 @@ st.text('Faça o upload de uma foto para identificação automatizada de seguran
 tabImg, tabVideo, tabWebCam = st.tabs(["Imagem", "Vídeo", "Webcam"])
 
 with st.spinner('Carregando modelo...'):
-  yolo=YOLO_Pred('Model2/weights/best.onnx','data.yaml')
+  yolo=YOLO_Pred('Model/weights/best.onnx','data.yaml')
   
 
 isSecurity = False
