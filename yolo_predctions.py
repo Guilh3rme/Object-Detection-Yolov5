@@ -1,8 +1,11 @@
-import os
+#!/usr/bin/env python
+# coding: utf-8
 import cv2
 import numpy as np
+import os
 import yaml
 from yaml.loader import SafeLoader
+
 
 class YOLO_Pred():
     def __init__(self,onnx_model,data_yaml):
@@ -17,7 +20,9 @@ class YOLO_Pred():
         self.yolo = cv2.dnn.readNetFromONNX(onnx_model)
         self.yolo.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
         self.yolo.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
-            
+        
+    
+        
     def predictions(self,image):
         
         row, col, d = image.shape
@@ -72,16 +77,15 @@ class YOLO_Pred():
         confidences_np = np.array(confidences).tolist()
 
         # NMS
-        index = np.array(cv2.dnn.NMSBoxes(boxes_np,confidences_np,0.25,0.45)).flatten()
-        
-
+        index = cv2.dnn.NMSBoxes(boxes_np,confidences_np,0.25,0.45).flatten()
 
         # Draw the Bounding
-        for ind in index:
+        for i in index:
             # extract bounding box
-            x,y,w,h = boxes_np[ind]
-            bb_conf = int(confidences_np[ind]*100)
-            classes_id = classes[ind]
+            x,y,w,h = boxes_np[i]
+
+            bb_conf = int(confidences_np[i]*100)
+            classes_id = classes[i]
             class_name = self.labels[classes_id]
             colors = self.generate_colors(classes_id)
 
@@ -94,6 +98,7 @@ class YOLO_Pred():
             
             
         return image
+    
     
     def generate_colors(self,ID):
         np.random.seed(10)

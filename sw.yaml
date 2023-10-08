@@ -1,0 +1,4 @@
+train: folders/train
+val: folders/test
+nc: 3
+names: ["Livre", "Ocupado", "Fora_vaga"]
